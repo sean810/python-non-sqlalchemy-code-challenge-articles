@@ -1,5 +1,7 @@
 # Phase 3 Code Challenge: Articles - without SQLAlchemy (Updated)
+Magazine Article Management System.
 
+Welcome to the Magazine Article Management System! This project allows you to manage the relationships between authors, articles, and magazines. You can create authors, assign articles to them, and link articles to magazines. The system also enables you to explore various features such as searching for authors by their articles, finding contributors to a specific magazine, and much more.
 In this code challenge, you will be working with a Magazine domain.
 
 We have three models: `Author`, `Article`, and `Magazine`.
@@ -8,9 +10,6 @@ For our purposes, an `Author` has many `Article`s, a `Magazine` has many
 `Article`s, and `Article`s belong to both `Author` and `Magazine`.
 
 `Author` - `Magazine` is a many to many relationship.
-
-**Note**: You should draw your domain on paper or on a whiteboard _before you
-start coding_. Remember to identify a single source of truth for your data.
 
 ## Instructions
 
@@ -43,135 +42,55 @@ extract it into a shared helper method.
 expect. If you have any methods that are not working yet, feel free to leave
 comments describing your progress.
 
-## Core Deliverables
+## Features
+Author:
 
-Write the following methods in the classes in the files provided. Feel free to
-build out any helper methods if needed.
+View articles written by the author.
+View magazines the author has contributed to.
+Add new articles with validation for title and magazine.
+Get unique categories of magazines the author has contributed to.
 
-### Initializers and Properties
+Article:
 
-#### Author
+Each article is linked to an author and a magazine.
+The article title is validated and immutable.
+Track all created articles globally.
 
-- `Author __init__(self, name)`
-  - Author is initialized with a name
-- `Author property name`
-  - Returns the author's name
-  - Names must be of type `str`
-  - Names must be longer than 0 characters
-  - Should **not be able** to change after the author is instantiated.
-  - _hint: hasattr()_
+Magazine:
 
-#### Magazine
+List articles published in the magazine.
+Get authors who contributed to the magazine.
+Get all article titles in the magazine.
+Find authors who wrote more than two articles for the magazine.
+Find the magazine with the most articles.
 
-- `Magazine __init__(self, name, category)`
-  - A magazine is initialized with a name and a category
-- `Magazine property name`
-  - Returns the magazine's name
-  - Names must be of type `str`
-  - Names must be between 2 and 16 characters, inclusive
-  - Should **be able** to change after the magazine is instantiated.
-- `Magazine property category`
-  - Returns the magazine's category
-  - Categories must be of type `str`
-  - Categories must be longer than 0 characters
-  - Should **be able** to change after the magazine is instantiated.
+## Setup
+Run pipenv install while inside of this directory. Then run pipenv shell to jump into the shell.
+Use python lib/debug.py in you're command line to start a ipdb session tehn run pytest to check if you're code is passing the tests or failing the tests. 
 
-#### Article
+### Features
+Add New Plants: Users can add new plants to the store with details such as name, image URL, and price.
+Search Plants: The app allows users to search for plants by name.
+Mark Sold Out: Users can mark plants as sold out or available.
+Delete Plants: Users can delete plants from the store.
+Responsive Design: The app is mobile-friendly, displaying plant cards in a grid that adjusts for different screen sizes.
+Backend Integration: Uses JSON Server to simulate a backend and store plant data.
 
-- `Article __init__(self, author, magazine, title)`
-  - Article is initialized with an `Author` instance, a `Magazine` instance, and
-    a title.
-- `Article property title`
-  - Returns the article's title
-  - Titles must be of type `str`
-  - Titles must be between 5 and 50 characters, inclusive
-  - Should **not be able** to change after the article is instantiated.
-  - _hint: hasattr()_
+### Development
+If you want to contribute or develop further features, follow these steps:
 
-### Object Relationship Methods and Properties
+Fork the repository.
+Create a new branch: git checkout -b feature-name.
+Commit your changes: git commit -m "Your commit message".
+Push to your branch: git push origin feature-name.
+Open a pull request with a description of your changes.
 
-#### Article
+### Technologies Used
+Python 3.x: The programming language used to build the system.
+Classes: Implemented using object-oriented principles to manage the relationships between authors, articles, and magazines.
 
-- `Article property author`
-  - Returns the author object for that article
-  - Must be of type `Author`
-  - Authors **can be changed** after the article object is initialized
-- `Article property magazine`
-  - Returns the magazine object for that article
-  - Must be of type `Magazine`
-  - Magazines **can be changed** after the article object is initialized
+### Acknowledgments
+Python: A versatile programming language for building this system.
 
-#### Author
+Object-Oriented Programming: Used to model the relationships between authors, articles, and magazines.
 
-- `Author articles()`
-  - Returns a list of all the articles the author has written
-  - Must be of type `Article`
-- `Author magazines()`
-  - Returns a **unique** list of magazines for which the author has contributed
-    to
-  - Must be of type `Magazine`
-
-#### Magazine
-
-- `Magazine articles()`
-  - Returns a list of all the articles the magazine has published
-  - Must be of type `Article`
-- `Magazine contributors()`
-  - Returns a **unique** list of authors who have written for this magazine
-  - Must be of type `Author`
-
-### Aggregate and Association Methods
-
-#### Author
-
-- `Author add_article(magazine, title)`
-  - Receives a `Magazine` instance, and a title as arguments
-  - Creates and returns a new `Article` instance and associates it with that
-    author, the magazine provided
-- `Author topic_areas()`
-  - Returns a **unique** list of strings with the categories of the magazines
-    the author has contributed to
-  - Returns `None` if the author has no articles
-
-#### Magazine
-
-- `Magazine article_titles()`
-  - Returns a list of the titles strings of all articles written for that
-    magazine
-  - Returns `None` if the magazine has no articles
-- `Magazine contributing_authors()`
-  - Returns a list of authors who have written more than 2 articles for the
-    magazine
-  - Authors must be of type `Author`
-  - Returns `None` if the magazine has no authors with more than 2 publications
-
-### Advanced Deliverables
-
-These deliverables are not required to pass the code challenge, but if you have
-the extra time, or even after the code challenge, they are a great way to
-stretch your skills.
-
-#### Bonus: Aggregate and Association Method
-
-- `Magazine classmethod top_publisher()`
-  - Returns the `Magazine` instance with the most articles
-  - Returns `None` if there are no articles.
-  - Uncomment lines 206-224 in the magazine_test file
-  - _hint: will need a way to remember all magazine objects_
-
-#### Bonus: For any invalid inputs raise an `Exception`
-
-- First, **comment out** the following lines
-  - **article_test.py**
-    - lines 28-29
-  - **author_test.py**
-    - lines 31-32, and 35-36
-  - **magazine_test.py**
-    - lines 31-32, 47-48, 51-52, 84-85, and 100-102
-- Then, **uncomment** the following lines in the test files
-  - **article_test.py**
-    - lines 34-35, 46-47, and 50-51
-  - **author_test.py**
-    - lines 39-40, and 53-54
-  - **magazine_test.py**
-    - lines 35-36, 55-56, 59-60, 90-91, and 105-106
